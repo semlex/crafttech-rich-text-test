@@ -9,16 +9,16 @@ const EditStyle = () => {
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (!selectedFigure) return;
+
       const newValue = e.target.value;
       const field = e.target.name;
 
-      if (selectedFigure) {
-        dispatch(
-          updateSelectedFigure({
-            [field]: newValue,
-          }),
-        );
-      }
+      dispatch(
+        updateSelectedFigure({
+          [field]: newValue,
+        }),
+      );
     },
     [dispatch, selectedFigure],
   );
