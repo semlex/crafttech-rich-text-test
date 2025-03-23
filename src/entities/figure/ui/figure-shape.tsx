@@ -4,7 +4,6 @@ import { Group, Rect } from 'react-konva';
 import html2canvas from 'html2canvas';
 import { Html } from 'react-konva-utils';
 import { Figure } from '../model/types';
-import { useAppSelector } from '@/shared/libs';
 import { HtmlText } from '@/shared/ui';
 import 'react-quill/dist/quill.snow.css';
 
