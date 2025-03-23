@@ -1,0 +1,28 @@
+.custom-quill__wrapper {
+  display: hidden;
+  position: absolute;
+  overflow: auto;
+  left: -999px;
+  top: -999px;
+}
+
+.custom-quill {
+  width: 100%;
+  height: 100%;
+  border: none;
+
+  .ql-container {
+    border: none;
+  }
+
+  .ql-editor {
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+  }
+
+  .ql-toolbar {
+    display: none;
+  }
+}
