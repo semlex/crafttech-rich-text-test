@@ -2,9 +2,9 @@ import Konva from 'konva';
 import { Layer, Stage } from 'react-konva';
 import { useAppDispatch, useAppSelector } from '@/shared/libs';
 import { addFigure, Figure, FigureShape, setSelectedFigure } from '@/entities/figure';
-import useZoom from '../libs/hooks/useZoom';
+import useZoom from '../libs/hooks/use-zoom';
 import { uid } from 'uid';
-import useResize from '../libs/hooks/useResize';
+import useResize from '../libs/hooks/use-resize';
 import { FigureTransformer, useFigureTransform } from '@/features/figure-transform';
 import { useSelectFigure } from '@/features/select-figure';
 
