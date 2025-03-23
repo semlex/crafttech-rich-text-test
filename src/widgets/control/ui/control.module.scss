@@ -1,0 +1,15 @@
+.container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  top: 10px;
+  left: 10px;
+  z-index: 10;
+  padding: 15px 20px;
+  border-radius: 7px;
+  background: white;
+  -webkit-box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0.2);
+  box-shadow: 0px 0px 20px 0px rgba(34, 60, 80, 0.2);
+}
