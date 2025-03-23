@@ -10,6 +10,7 @@ import 'react-quill/dist/quill.snow.css';
 
 type FigureShapeProps = {
   figure: Figure;
+  isSelected: boolean;
   handleClick: (event: Konva.KonvaEventObject<MouseEvent>, figure: Figure) => void;
   handleTransformEnd: (groupRef: MutableRefObject<Konva.Group | null>, figure: Figure) => void;
   FigureTransformer: (props: {
@@ -19,10 +20,8 @@ type FigureShapeProps = {
 };
 
 const FigureShape = (props: FigureShapeProps) => {
-  const { figure, handleClick, handleTransformEnd, FigureTransformer } = props;
-  const { x, y, width, height, rotation, fill, stroke, html, id } = figure;
-
-  const selectedFigure = useAppSelector((state) => state.figure.selectedFigure);
+  const { figure, isSelected, handleClick, handleTransformEnd, FigureTransformer } = props;
+  const { x, y, width, height, rotation, fill, stroke, html } = figure;
 
   const groupRef = useRef<Konva.Group | null>(null);
   const imageRef = useRef<Konva.Image | null>(null);
@@ -72,7 +71,7 @@ const FigureShape = (props: FigureShapeProps) => {
       >
         <Rect width={width} height={height} fill={fill} stroke={stroke} />
       </Group>
-      {selectedFigure?.id === id && <FigureTransformer groupRef={groupRef} figure={figure} />}
+      {isSelected && <FigureTransformer groupRef={groupRef} figure={figure} />}
       <Html>
         <HtmlText width={width - 1} height={height - 1} html={html} ref={htmlRef} />
       </Html>

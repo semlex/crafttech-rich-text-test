@@ -16,7 +16,7 @@ const Canvas = () => {
   const { width, height } = useResize();
   const { stageRef, handleWheel } = useZoom();
 
-  const { handleFigureClick } = useSelectFigure();
+  const { selectedFigure, handleFigureClick } = useSelectFigure();
   const { handleTransformEnd: handleFigureTransformEnd } = useFigureTransform();
 
   const handleClick = () => {
@@ -64,6 +64,7 @@ const Canvas = () => {
           <FigureShape
             key={figure.id}
             figure={figure}
+            isSelected={selectedFigure?.id === figure.id}
             handleClick={handleFigureClick}
             FigureTransformer={FigureTransformer}
             handleTransformEnd={handleFigureTransformEnd}

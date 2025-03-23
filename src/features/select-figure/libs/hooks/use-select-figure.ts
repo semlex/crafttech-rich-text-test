@@ -1,10 +1,13 @@
 import { useRef } from 'react';
 import Konva from 'konva';
 import { Figure, setSelectedFigure } from '@/entities/figure';
-import { useAppDispatch } from '@/shared/libs';
+import { useAppDispatch, useAppSelector } from '@/shared/libs';
 
 export const useSelectFigure = () => {
   const dispatch = useAppDispatch();
+
+  const selectedFigure = useAppSelector((state) => state.figure.selectedFigure);
+
   const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleSelectFigure = (figure: Figure) => {
@@ -26,5 +29,5 @@ export const useSelectFigure = () => {
     }, 200);
   };
 
-  return { handleFigureClick };
+  return { selectedFigure, handleFigureClick };
 };
