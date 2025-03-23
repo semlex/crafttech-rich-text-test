@@ -1,5 +1,6 @@
 {
   "name": "crafttech-rich-text-test",
+  "homepage": "https://semlex.github.io/crafttech-rich-text-test/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,10 +8,13 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.6.1",
+    "gh-pages": "^6.3.0",
     "html2canvas": "^1.4.1",
     "konva": "^9.3.18",
     "react": "^18.3.1",
