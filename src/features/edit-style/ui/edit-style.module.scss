@@ -1,0 +1,19 @@
+.container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.inputGroup {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.colorPicker {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  cursor: pointer;
+  margin-right: 5px;
+}
