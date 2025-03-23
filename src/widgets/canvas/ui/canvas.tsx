@@ -6,6 +6,7 @@ import useZoom from '../libs/hooks/useZoom';
 import { uid } from 'uid';
 import useResize from '../libs/hooks/useResize';
 import { FigureTransformer, useFigureTransform } from '@/features/figure-transform';
+import { useSelectFigure } from '@/features/select-figure';
 
 const Canvas = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +16,8 @@ const Canvas = () => {
   const { width, height } = useResize();
   const { stageRef, handleWheel } = useZoom();
 
-  const { handleTransformEnd } = useFigureTransform();
+  const { handleFigureClick } = useSelectFigure();
+  const { handleTransformEnd: handleFigureTransformEnd } = useFigureTransform();
 
   const handleClick = () => {
     dispatch(setSelectedFigure(null));
@@ -62,8 +64,9 @@ const Canvas = () => {
           <FigureShape
             key={figure.id}
             figure={figure}
+            handleClick={handleFigureClick}
             FigureTransformer={FigureTransformer}
-            handleTransformEnd={handleTransformEnd}
+            handleTransformEnd={handleFigureTransformEnd}
           />
         ))}
       </Layer>

@@ -4,32 +4,29 @@ import { Group, Rect } from 'react-konva';
 import html2canvas from 'html2canvas';
 import { Html } from 'react-konva-utils';
 import { Figure } from '../model/types';
-import { setSelectedFigure } from '../model/figureSlice';
-import { useAppDispatch, useAppSelector } from '@/shared/libs';
+import { useAppSelector } from '@/shared/libs';
 import { HtmlText } from '@/shared/ui';
 import 'react-quill/dist/quill.snow.css';
 
 type FigureShapeProps = {
   figure: Figure;
+  handleClick: (event: Konva.KonvaEventObject<MouseEvent>, figure: Figure) => void;
+  handleTransformEnd: (groupRef: MutableRefObject<Konva.Group | null>, figure: Figure) => void;
   FigureTransformer: (props: {
     groupRef: MutableRefObject<Konva.Group | null>;
     figure: Figure;
   }) => JSX.Element;
-  handleTransformEnd: (groupRef: MutableRefObject<Konva.Group | null>, figure: Figure) => void;
 };
 
 const FigureShape = (props: FigureShapeProps) => {
-  const { figure, FigureTransformer, handleTransformEnd } = props;
+  const { figure, handleClick, handleTransformEnd, FigureTransformer } = props;
   const { x, y, width, height, rotation, fill, stroke, html, id } = figure;
-
-  const dispatch = useAppDispatch();
 
   const selectedFigure = useAppSelector((state) => state.figure.selectedFigure);
 
   const groupRef = useRef<Konva.Group | null>(null);
   const imageRef = useRef<Konva.Image | null>(null);
   const htmlRef = useRef<HTMLDivElement>(null);
-  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const renderImage = useCallback(async () => {
     const htmlText = htmlRef.current;
@@ -62,27 +59,12 @@ const FigureShape = (props: FigureShapeProps) => {
     renderImage();
   }, [html, width, stroke, height, fill, rotation, renderImage]);
 
-  const handleClick = (e: Konva.KonvaEventObject<MouseEvent>) => {
-    e.cancelBubble = true;
-
-    if (clickTimeoutRef.current) {
-      clearTimeout(clickTimeoutRef.current);
-      clickTimeoutRef.current = null;
-      return;
-    }
-
-    clickTimeoutRef.current = setTimeout(() => {
-      dispatch(setSelectedFigure(figure));
-      clickTimeoutRef.current = null;
-    }, 200);
-  };
-
   return (
     <>
       <Group
         x={x}
         y={y}
-        onClick={handleClick}
+        onClick={(e) => handleClick(e, figure)}
         rotation={rotation}
         onTransformEnd={() => handleTransformEnd(groupRef, figure)}
         ref={groupRef}
