@@ -1,21 +1,25 @@
-import html2canvas from 'html2canvas';
-import Konva from 'konva';
 import { MutableRefObject, useCallback, useEffect, useRef } from 'react';
+import Konva from 'konva';
 import { Group, Rect } from 'react-konva';
+import html2canvas from 'html2canvas';
 import { Html } from 'react-konva-utils';
-import 'react-quill/dist/quill.snow.css';
+import { Figure } from '../model/types';
+import { setSelectedFigure } from '../model/figureSlice';
 import { useAppDispatch, useAppSelector } from '@/shared/libs';
-import { Figure, setSelectedFigure } from '@/entities/figure';
 import { HtmlText } from '@/shared/ui';
-import { FigureTransformer } from '@/features/figure-transform';
+import 'react-quill/dist/quill.snow.css';
 
 type FigureShapeProps = {
   figure: Figure;
+  FigureTransformer: (props: {
+    groupRef: MutableRefObject<Konva.Group | null>;
+    figure: Figure;
+  }) => JSX.Element;
   handleTransformEnd: (groupRef: MutableRefObject<Konva.Group | null>, figure: Figure) => void;
 };
 
 const FigureShape = (props: FigureShapeProps) => {
-  const { figure, handleTransformEnd } = props;
+  const { figure, FigureTransformer, handleTransformEnd } = props;
   const { x, y, width, height, rotation, fill, stroke, html, id } = figure;
 
   const dispatch = useAppDispatch();

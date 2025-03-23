@@ -5,7 +5,7 @@ import { addFigure, Figure, FigureShape, setSelectedFigure } from '@/entities/fi
 import useZoom from '../libs/hooks/useZoom';
 import { uid } from 'uid';
 import useResize from '../libs/hooks/useResize';
-import { useFigureTransform } from '@/features/figure-transform';
+import { FigureTransformer, useFigureTransform } from '@/features/figure-transform';
 
 const Canvas = () => {
   const dispatch = useAppDispatch();
@@ -59,7 +59,12 @@ const Canvas = () => {
     >
       <Layer>
         {figures.map((figure: Figure) => (
-          <FigureShape key={figure.id} figure={figure} handleTransformEnd={handleTransformEnd} />
+          <FigureShape
+            key={figure.id}
+            figure={figure}
+            FigureTransformer={FigureTransformer}
+            handleTransformEnd={handleTransformEnd}
+          />
         ))}
       </Layer>
     </Stage>
